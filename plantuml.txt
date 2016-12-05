@@ -1,0 +1,22 @@
+@startuml
+skinparam componentStyle uml2
+left to right direction
+
+component [Веб-приложение] as app
+interface "http" as http
+http <.l. app: use
+interface "wire" as wire
+node "Миникомпьютер" {
+  component [HTTP Server] as web
+  component [контроллер] as ctl
+  interface "php" as php
+  web .l.> php : use
+  php -d- ctl
+  database [память] as mem
+  php -l- mem
+}
+http -r- web
+wire <.u. ctl : use
+component [лампа] as lmp
+wire -r- lmp
+@enduml

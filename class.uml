@@ -1,0 +1,39 @@
+@startuml
+hide circle
+class "<b>web</b>" as web <<interface>> {
+   <b>post</b>(url: String, parms: Parm[0..*]]): String
+   <b>get</b>(url: String, parms: Parm[0.*]): String
+}
+class "<b>Parm</b>" as Tparm <<dataType>> {
+   name: String
+   value: String
+}
+web ..> Tparm
+
+class "<b>php</b>" as php <<interface>> {
+   <b>setup</b>(lamps: Lamp[1..*]): Boolean
+   <b>setPower</b>(lamps: Power[1..*]): Boolean
+   <b>getColor</b>(lamps: int[1..*]): Color[1..*]
+}
+class "<b>Lamp</b>" as Tlamp <<dataType>> {
+   id: int
+   color: char
+   port: int
+   range: int[1..2]
+}
+class "<b>Power</b>" as Tpower <<dataType>> {
+   id: int
+   percent: int
+}
+php ..> Tlamp
+php ..> Tpower
+
+class "<b>lamp</b>" as lamp {
+   -id: int
+   -color: char
+   -port: int
+   -range: int[1..2]
+   <b>setPower</b>(power: int): Boolean
+   <b>getColor</b>(): String
+}
+@enduml
